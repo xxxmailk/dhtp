@@ -1,0 +1,84 @@
+#@dhtp
+#@author: ylx
+#@build time: 2019-09-17
+#
+#
+#config buildings
+#
+#type Http struct {
+#	HttpIP    string `yaml:"listen_ip,omitempty"`   // which ip address that http server listening
+#	HttpPort  string `yaml:"listen_port,omitempty"` // listening port of http server
+#	MountPath string `yaml:"mount_path, omitempty"` // http file server path
+#}
+#
+#type Tftp struct {
+#	TftpPath string `yaml:"mount_path, omitempty"` // tftp_files server path
+#	TftpIP   string `yaml:"listen_ip, omitempty"`  // ip address that tftp_files server listening on
+#}
+#
+#type Dhcp struct {
+#	ListenIP   string `yaml:"listen_ip,omitempty"` // which ip address that dhcp server was listening on
+#	ListenPort string `yaml:"listen_port,omitempty"`
+#	StartIP    string `yaml:"start_ip"`
+#	Range      int    `yaml:"lease_range"`       // lease ip address count
+#	NetMask    string `yaml:"netmask,omitempty"` // default /24
+#	PxeFile    string `yaml:"pxe_file"`          // pxe file name
+#}
+
+# http 服务配置
+http:
+
+  # http服务监听地址 偷懒可写0.0.0.0
+  listen_ip: 0.0.0.0
+
+  # http服务监听端口 默认80
+  listemn_port: 80
+
+  # http服务根目录地址，随便配置，注意权限, 至少644
+  # 不行就chmod -R 777 /mnt/dhtp/http
+  # 如果还是不行，那就检查一下防火墙和selinux是不是关闭了
+  mount_path: /mnt/dhtp/http
+
+# tftp_files 服务配置
+tftp:
+
+  # tftp_files 服务器根目录，配置原理同http服务
+  mount_path: /mnt/dhtp/tftp
+
+  # tftp服务监听地址 偷懒可写0.0.0.0
+  listen_ip: 0.0.0.0
+
+# dhcp 服务配置
+dhcp:
+
+  # 注意：
+  # dhcp 服务器监听地址，必须写为你想用来提供pxe安装服务的那个网卡的地址
+  # 不可以偷懒写成0.0.0.0
+  listen_ip: 192.168.181.134
+
+  # dhcp规定端口，不要改，详情参见RFC2132
+  # https://tools.ietf.org/html/rfc2132
+  listen_port: 67
+
+  # 起始IP地址
+  # 你想从哪个地址开始分配IP
+  # 必须和你用来提供dhcp服务的那个网卡同网段
+  # 否则pxe client无法访问tftp服务器
+  start_ip: 192.168.181.135
+
+  # 你想给多少个IP地址来给客户端使用，一般不超过253个
+  # 如果你把子网掩码配的非常大，当我没说
+  lease_range: 10
+
+  # dhcp分配给客户端的子网掩码
+  # 是的，你可以整个大段给客户端用
+  netmask: 255.255.255.0
+
+  # 这个地址填上面的Listen_ip就行
+  # next server address -> siaddr: 参见RFC2132
+  tftp_server: 192.168.181.134
+
+  # pxe boot的文件名，一般不改，非要个性化也随你
+  pxe_file: pxelinux.0
+
+

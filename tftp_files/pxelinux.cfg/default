@@ -1,0 +1,11 @@
+default menu.c32 
+   prompt 
+   timeout 30 
+
+   menu title Auto Install CentOS 7 PXE Menu
+
+label dhtp pxe
+  kernel suse5.5/linux
+  append initrd=suse5.5/initrd install=http://192.168.102.3/suse6/  autoyast=http://192.168.102.3/suse6/autoinst.xml splash=silent showopts
+
+   menu end

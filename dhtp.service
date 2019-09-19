@@ -1,0 +1,14 @@
+[Unit]
+Description=dhtp server
+Documentation=https://github.com/xxxmailk/dhtp
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/dhtp
+StandardOutput=null
+Restart=on-failure
+ExecStop=/bin/kill -s SIGQUIT $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+Alias=syslog.service
