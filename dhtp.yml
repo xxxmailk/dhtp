@@ -1,29 +1,6 @@
 #@dhtp
 #@author: ylx
 #@build time: 2019-09-17
-#
-#
-#config buildings
-#
-#type Http struct {
-#	HttpIP    string `yaml:"listen_ip,omitempty"`   // which ip address that http server listening
-#	HttpPort  string `yaml:"listen_port,omitempty"` // listening port of http server
-#	MountPath string `yaml:"mount_path, omitempty"` // http file server path
-#}
-#
-#type Tftp struct {
-#	TftpPath string `yaml:"mount_path, omitempty"` // tftp_files server path
-#	TftpIP   string `yaml:"listen_ip, omitempty"`  // ip address that tftp_files server listening on
-#}
-#
-#type Dhcp struct {
-#	ListenIP   string `yaml:"listen_ip,omitempty"` // which ip address that dhcp server was listening on
-#	ListenPort string `yaml:"listen_port,omitempty"`
-#	StartIP    string `yaml:"start_ip"`
-#	Range      int    `yaml:"lease_range"`       // lease ip address count
-#	NetMask    string `yaml:"netmask,omitempty"` // default /24
-#	PxeFile    string `yaml:"pxe_file"`          // pxe file name
-#}
 
 # http 服务配置
 http:
