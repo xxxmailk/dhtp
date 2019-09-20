@@ -77,6 +77,12 @@ a simple dhcp+http+tftp server for pxe deployment and packaged in one binary fil
     ```bash
     systemctl start dhtp
     ```
+5. 到此，你就可以开始进行pxe配置了。
+    > tftp目录： /mnt/dhtp/tftp
+
+    > http目录： /mnt/dhtp/http
+
+    > 只需要按照pxe规则将linux iso中的相关内容放置到http目录下，并修改/mnt/tftp/pxelinux.cfg/default中的grub启动条目，你就能尝试正确地从pxe开始现状操作系统了。
 5. 在配置文件中，默认tftp根目录在/mnt/tftp目录下，将boot image从iso中提取出来，放置到tftp目录即可。
 6. tftp目录中我提前放置了一个grub样例，/mnt/tftp/pxelinux.cfg
 具体如何配置grub请自行上网搜索教程,如何从iso中提取boot image也是如此。
